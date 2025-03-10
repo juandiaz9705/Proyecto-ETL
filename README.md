@@ -25,7 +25,7 @@ repo_url = "https://github.com/NocturneBear/NBA-Data-2010-2024"
 
 **2 Creación del área de staging:** El script crea una estructura de directorios dentro de este proyecto:
 
-staging/
+data/staging/
 
 └── extract_20250309_120532/      # Directorio con timestamp de extracción
 
