@@ -36,3 +36,11 @@ data/staging/
     └── _VALIDATION.json           # Resultados de validación
     
 **3. Preparación para ETL:** Después de la extracción, los datos en el área de staging quedan listos para ser procesados por el componente de transformación.
+
+
+**Scripts Principales del Procesamiento**
+
+processed_data/scripts esta carpeta contiene los scripts que realizan el proceso de ETL
+
+**nba_etl.py:**  Este script implementa la fase de Transformación y Carga (Transform & Load) del proceso ETL.
+**test_extraction.py:** Este script implementa la fase de Extracción (Extract) del proceso ETL, encargándose específicamente del proceso  de obtener datos del repositorio fuente y prepararlos en el área de staging-
