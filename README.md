@@ -27,7 +27,7 @@ repo_url = "https://github.com/NocturneBear/NBA-Data-2010-2024"
 
 data/staging/
 
-└── extract_20250309_120532/      # Directorio con timestamp de extracción
+└── extract_20250309_230947/      # Directorio con timestamp de extracción
 
     ├── play_off_totals_2010_2024.csv  # Datos extraídos
     
