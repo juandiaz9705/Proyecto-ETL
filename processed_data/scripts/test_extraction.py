@@ -7,7 +7,6 @@ import pandas as pd
 from datetime import datetime
 from pathlib import Path
 
-#Clase de extracción de repositorio
 class RepositoryToStaging:
 
     def __init__(self, source_repo_url, staging_dir, log_dir='logs'):
@@ -26,7 +25,7 @@ class RepositoryToStaging:
         self.setup_logging()
     
     def setup_logging(self):
-        """Configura el sistema de logging"""
+        
         log_file = self.log_dir / f'repo_extraction_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
         
         logging.basicConfig(
@@ -209,15 +208,14 @@ class RepositoryToStaging:
     def download_specific_file(self, file_url, output_path):
 
         try:
-            # Convertir URL de GitHub web a URL raw
-            # Ejemplo: https://github.com/user/repo/blob/main/file.csv -> https://raw.githubusercontent.com/user/repo/main/file.csv
+           
             raw_url = file_url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/')
             
             self.logger.info(f"Descargando archivo desde: {raw_url}")
             
             import requests
             response = requests.get(raw_url)
-            response.raise_for_status()  # Lanzar excepción si hay error HTTP
+            response.raise_for_status()  
             
             # Guardar el archivo
             with open(output_path, 'wb') as f:
@@ -247,21 +245,21 @@ class RepositoryToStaging:
             if not self.download_specific_file(nba_file_url, nba_file_path):
                 self.logger.error("Fallo al descargar archivo específico. Intentando clonar repositorio completo.")
                 
-                # Paso 1 (alternativo): Clonar repositorio
+              #Clonar repositorio completo
                 if not self.clone_repository():
                     self.logger.error("Fallo al clonar repositorio. Abortando proceso.")
                     return False
             
-            # Paso 2: Establecer archivos de datos (específicamente o encontrados)
+            # Establecer archivos de datos
             data_files = [nba_file_path] if nba_file_path.exists() else self.find_data_files(data_patterns=['*.csv'])
             
-            # Paso 3: Copiar al staging
+            # Copiar al staging
             if not self.copy_to_staging(data_files):
                 self.logger.error("Fallo al copiar archivos al staging. Abortando proceso.")
                 self.cleanup()
                 return False
-            
-            # Paso 4: Validar archivos
+        
+            # Validar archivos
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             current_staging = self.staging_dir / f'extract_{timestamp}'
             copied_files = list(current_staging.glob('*.*'))
@@ -272,11 +270,11 @@ class RepositoryToStaging:
             pd.Series(validation_results).to_json(validation_file)
             self.logger.info(f"Resultados de validación guardados en {validation_file}")
             
-            # Paso 5: Preparar para ETL
+            # Preparar para ETL
             if not self.prepare_for_etl(current_staging):
                 self.logger.warning("Advertencia: Posibles problemas al preparar datos para ETL")
             
-            # Paso 6: Limpieza
+            # Limpieza
             self.cleanup()
             
             self.logger.info("Proceso de extracción de repositorio a staging completado con éxito")
@@ -290,7 +288,8 @@ class RepositoryToStaging:
 
 def main():
     parser = argparse.ArgumentParser(description='Extracción de datos desde repositorio a staging')
-    parser.add_argument('--repo', type=str, required=True, help='URL del repositorio fuente')
+    parser.add_argument('--repo', type=str, default='https://github.com/NocturneBear/NBA-Data-2010-2024',
+                        help='URL del repositorio fuente (predeterminado: NBA-Data-2010-2024)')
     parser.add_argument('--staging', type=str, default='staging', help='Directorio de staging')
     parser.add_argument('--log-dir', type=str, default='logs', help='Directorio de logs')
     
@@ -305,10 +304,10 @@ def main():
     success = extractor.run()
     
     if success:
-        print("\n✅ Proceso completado con éxito\n")
+        print("\nProceso completado con éxito\n")
         return 0
     else:
-        print("\n❌ El proceso falló. Revise los logs para más detalles.\n")
+        print("\nEl proceso falló. Revise los logs para más detalles.\n")
         return 1
 
 

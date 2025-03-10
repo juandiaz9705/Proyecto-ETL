@@ -89,7 +89,6 @@ class NBAPlayoffsETL:
             
         except Exception as e:
             self.logger.error(f"Error al buscar archivo de entrada: {str(e)}")
-            # Intentar usar un archivo predeterminado como fallback
             default_file = 'play_off_totals_2010_2024.csv'
             self.logger.info(f"Usando archivo predeterminado: {default_file}")
             return default_file
@@ -445,10 +444,10 @@ def main():
     success = etl.run_pipeline()
 
     if success:
-        print("\n✅ Proceso ETL completado correctamente\n")
+        print("\Proceso ETL completado correctamente\n")
         return 0
     else:
-        print("\n❌ Error en el proceso ETL. Revise los logs para más detalles.\n")
+        print("\nError en el proceso ETL. Revise los logs para más detalles.\n")
         return 1
 
 
