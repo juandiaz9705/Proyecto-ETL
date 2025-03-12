@@ -25,7 +25,7 @@ class ETLAutomation:
             },
             'schedule_time': '02:00',  # Hora de ejecución diaria (formato HH:MM)
             'repo_url': 'https://github.com/NocturneBear/NBA-Data-2010-2024',
-            'staging_dir': 'staging',
+            'staging_dir': 'data/staging',
             'extract_script': 'repository_to_staging.py',  # Asumiendo que renombraste test_extraction.py
             'max_retries': 3,
             'retry_delay': 300  # 5 minutos entre reintentos
@@ -41,7 +41,7 @@ class ETLAutomation:
         # Crear directorios necesarios
         os.makedirs('logs', exist_ok=True)
         os.makedirs(self.config['staging_dir'], exist_ok=True)
-        os.makedirs('processed_data', exist_ok=True)
+        os.makedirs('data/processed_data', exist_ok=True)
 
     def setup_logging(self):
     

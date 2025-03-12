@@ -13,7 +13,7 @@ from pathlib import Path
 class NBAPlayoffsETL:
 
     
-    def __init__(self, input_file=None, db_config=None, staging_dir='staging'):
+    def __init__(self, input_file=None, db_config=None, staging_dir='data/staging'):
 
         self.staging_dir = Path(staging_dir)
         self.input_file = input_file or self._find_latest_input_file()
@@ -50,8 +50,8 @@ class NBAPlayoffsETL:
         self.logger = logging.getLogger(__name__)
         
         # Crear directorio para datos procesados si no existe
-        processed_dir = Path('processed_data')
-        processed_dir.mkdir(exist_ok=True)
+        processed_dir = Path('data/processed_data')
+        processed_dir.mkdir(exist_ok=True, parents=True)
         
         # Intentar establecer conexión con la base de datos
         try:
@@ -67,7 +67,7 @@ class NBAPlayoffsETL:
             staging_dirs = [d for d in self.staging_dir.glob('extract_*') if d.is_dir()]
             if not staging_dirs:
                 # Si no hay directorios en staging, buscar el archivo directamente en el directorio raíz
-                default_file = Path('play_off_totals_2010_2024.csv')
+                default_file = Path('data/play_off_totals_2010_2024.csv')
                 if default_file.exists():
                     return str(default_file)
                 raise FileNotFoundError("No se encontraron directorios de extracción en staging ni archivo predeterminado")
@@ -285,12 +285,12 @@ class NBAPlayoffsETL:
             self.transformed_data = df
             
             # Guardar datos transformados en formato CSV para uso por la aplicación Flask
-            output_path = Path('processed_data') / f'playoffs_detailed_{datetime.now().strftime("%Y%m%d")}.csv'
+            output_path = Path('data/processed_data') / f'playoffs_detailed_{datetime.now().strftime("%Y%m%d")}.csv'
             df.to_csv(output_path, index=False)
             self.logger.info(f"Datos transformados guardados en: {output_path}")
             
             # También guardar una copia con nombre constante para la aplicación Flask
-            df.to_csv(Path('processed_data') / 'playoffs_detailed.csv', index=False)
+            df.to_csv(Path('data/processed_data') / 'playoffs_detailed.csv', index=False)
             
             self.logger.info("Transformación completada correctamente")
             return True
@@ -319,11 +319,12 @@ class NBAPlayoffsETL:
                 'PLUS_MINUS_PER_MIN', 'AST_TO_RATIO'
             ]].copy()
 
-            # Convertir a lista de tuplas para psycopg2
-            detailed_records = [tuple(x) for x in detailed_data.values]
+            # Convertir a lista de tuplas para psycopg2 - Convertir tipos NumPy a Python
+            detailed_records = [tuple(x.item() if hasattr(x, 'item') else x for x in row) 
+                           for row in detailed_data.values]
 
-            # Insertar datos detallados usando execute_values
             with self.conn.cursor() as cur:
+                # Insertar datos detallados usando execute_values
                 execute_values(
                     cur,
                     """
@@ -337,13 +338,18 @@ class NBAPlayoffsETL:
                     page_size=100
                 )
 
-                # Insertar resumen de temporada
+                # Convertir objetos NumPy a tipos Python estándar para el resumen por temporada
                 season_records = [
-                    (index, row['PTS'], row['FG3M'], row['AST'],
-                     row['OFFENSIVE_EFFICIENCY'], row['DEFENSIVE_RATING'])
+                    (index, 
+                     float(row['PTS']), 
+                     float(row['FG3M']), 
+                     float(row['AST']),
+                     float(row['OFFENSIVE_EFFICIENCY']), 
+                     float(row['DEFENSIVE_RATING']))
                     for index, row in self.season_summary.iterrows()
                 ]
 
+                # Insertar resumen por temporada
                 execute_values(
                     cur,
                     """
@@ -352,16 +358,21 @@ class NBAPlayoffsETL:
                      avg_off_efficiency, avg_def_rating)
                     VALUES %s
                     """,
-                    season_records
+                    season_records,
+                    page_size=100
                 )
 
-                # Insertar resumen de equipo
+                # Convertir objetos NumPy a tipos Python estándar para el resumen por equipo
                 team_records = [
-                    (index, row['PTS'], row['WL'],
-                     row['OFFENSIVE_EFFICIENCY'], row['DEFENSIVE_RATING'])
+                    (index, 
+                     float(row['PTS']), 
+                     float(row['WL']),
+                     float(row['OFFENSIVE_EFFICIENCY']), 
+                     float(row['DEFENSIVE_RATING']))
                     for index, row in self.team_summary.iterrows()
                 ]
 
+                # Insertar resumen por equipo
                 execute_values(
                     cur,
                     """
@@ -370,7 +381,8 @@ class NBAPlayoffsETL:
                      avg_off_efficiency, avg_def_rating)
                     VALUES %s
                     """,
-                    team_records
+                    team_records,
+                    page_size=100
                 )
 
                 self.conn.commit()

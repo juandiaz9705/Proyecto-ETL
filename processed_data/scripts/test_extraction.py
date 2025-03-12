@@ -9,10 +9,16 @@ from pathlib import Path
 
 class RepositoryToStaging:
 
-    def __init__(self, source_repo_url, staging_dir, log_dir='logs'):
+    def __init__(self, source_repo_url, staging_dir='data/staging', log_dir='logs'):
       #Inicialización del repositorio
         
         self.source_repo_url = source_repo_url
+        
+        # Crear directorio data si no existe
+        data_dir = Path('data')
+        data_dir.mkdir(exist_ok=True, parents=True)
+        
+        # Asegurar que staging esté dentro de data
         self.staging_dir = Path(staging_dir)
         self.log_dir = Path(log_dir)
         self.temp_dir = Path('temp_repo')
@@ -20,6 +26,10 @@ class RepositoryToStaging:
         # Crear directorios necesarios
         self.staging_dir.mkdir(exist_ok=True, parents=True)
         self.log_dir.mkdir(exist_ok=True, parents=True)
+        
+        # Crear directorio processed_data dentro de data
+        processed_dir = Path('data/processed_data')
+        processed_dir.mkdir(exist_ok=True, parents=True)
         
         # Configuración de logging
         self.setup_logging()
@@ -51,7 +61,8 @@ class RepositoryToStaging:
                 ['git', 'clone', self.source_repo_url, str(self.temp_dir)],
                 check=True,
                 capture_output=True,
-                text=True
+                text=True,
+                encoding='utf-8'  # Especificar codificación para evitar errores
             )
             
             self.logger.info(f"Repositorio clonado exitosamente en {self.temp_dir}")
@@ -161,9 +172,9 @@ class RepositoryToStaging:
     
     def prepare_for_etl(self, staging_dir):
         try:
-            # Crear directorio processed_data si no existe
-            processed_dir = Path('processed_data')
-            processed_dir.mkdir(exist_ok=True)
+            # Usar processed_data dentro de data
+            processed_dir = Path('data/processed_data')
+            processed_dir.mkdir(exist_ok=True, parents=True)
             
             # Buscar el archivo principal de playoffs
             playoff_file = None
@@ -177,7 +188,8 @@ class RepositoryToStaging:
                 return False
             
             # Copiar a la ubicación esperada por el ETL
-            target_path = Path('play_off_totals_2010_2024.csv')
+            # Cambiar para guardar dentro de data
+            target_path = Path('data/play_off_totals_2010_2024.csv')
             shutil.copy2(playoff_file, target_path)
             self.logger.info(f"Archivo preparado para ETL: {playoff_file} -> {target_path}")
             
@@ -290,7 +302,7 @@ def main():
     parser = argparse.ArgumentParser(description='Extracción de datos desde repositorio a staging')
     parser.add_argument('--repo', type=str, default='https://github.com/NocturneBear/NBA-Data-2010-2024',
                         help='URL del repositorio fuente (predeterminado: NBA-Data-2010-2024)')
-    parser.add_argument('--staging', type=str, default='staging', help='Directorio de staging')
+    parser.add_argument('--staging', type=str, default='data/staging', help='Directorio de staging')
     parser.add_argument('--log-dir', type=str, default='logs', help='Directorio de logs')
     
     args = parser.parse_args()
