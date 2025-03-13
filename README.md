@@ -31,9 +31,12 @@ El proyecto ETL está divido en tres componentes principales:
 **1. Fuente de Datos**
 El proyecto obtiene datos del repositorio público:
 
-Repositorio: NBA-Data-2010-2024
-Archivo principal: play_off_totals_2010_2024.csv
-Características: 2,362 registros de juegos, 57 columnas de métricas
+- Repositorio: NBA-Data-2010-2024
+- 
+- Archivo principal: play_off_totals_2010_2024.csv
+- 
+- Características: 2,362 registros de juegos, 57 columnas de métricas
+- 
 
 **2. Proceso de Extracción**
 El componente de extracción (test_extraction.py) implementa el siguiente flujo:
