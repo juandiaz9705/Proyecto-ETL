@@ -1,3 +1,8 @@
+"""
+Autor: Juan Diego Díaz Guzmán
+Fecha: 13-03-2025
+"""
+
 import schedule
 import time
 from datetime import datetime
@@ -26,7 +31,7 @@ class ETLAutomation:
             'schedule_time': '02:00',  # Hora de ejecución diaria (formato HH:MM)
             'repo_url': 'https://github.com/NocturneBear/NBA-Data-2010-2024',
             'staging_dir': 'data/staging',
-            'extract_script': 'repository_to_staging.py',  # Asumiendo que renombraste test_extraction.py
+            'extract_script': 'processed_data/scripts/test_extraction.py',  # Asumiendo que renombraste test_extraction.py
             'max_retries': 3,
             'retry_delay': 300  # 5 minutos entre reintentos
         }

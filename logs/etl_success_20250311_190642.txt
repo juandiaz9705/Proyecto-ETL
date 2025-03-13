@@ -1,3 +1,0 @@
-ETL ejecutado correctamente: 2025-03-11T19:06:42.638375
-Archivo de entrada: data\staging\extract_20250311_190603\play_off_totals_2010_2024.csv
-Filas procesadas: 2362

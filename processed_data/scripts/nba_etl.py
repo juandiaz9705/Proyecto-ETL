@@ -1,3 +1,9 @@
+"""
+Autor: Juan Diego Díaz Guzmán
+Fecha: 13-03-2025
+"""
+
+
 import pandas as pd
 import numpy as np
 from datetime import datetime
