@@ -5,15 +5,25 @@ Este proyecto implementa un proceso ETL(Extract, Transform, Load) completo para 
 **Estructura del Proyecto**
 El proyecto ETL está divido en tres componentes principales:
 
+
 ├── automaticetl.py        # Script de automatización principal
+
 ├── nba_etl.py             # Componente de transformación y carga 
+
 ├── test_extraction.py     # Componente de extracción (renombrado a repository_to_staging.py)
+
 ├── logs/                  # Directorio para archivos de registro
+
 ├── processed_data/        # Datos procesados y transformados
+
 └── staging/               # Área de staging para datos extraídos
+
     └── extract_[timestamp]/
+    
         ├── play_off_totals_2010_2024.csv
+        
         ├── _CONTROL.txt
+        
         └── _VALIDATION.json
 
 
