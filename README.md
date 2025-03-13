@@ -41,26 +41,26 @@ El componente de extracción (test_extraction.py) implementa el siguiente flujo:
 
 **Conexión al repositorio fuente:**
 
-Descarga directa del archivo CSV mediante HTTPS
-Fallback a clonación completa del repositorio en caso necesario
+- Descarga directa del archivo CSV mediante HTTPS
+- Fallback a clonación completa del repositorio en caso necesario
 
 
 **Creación del área de staging:**
 
-Genera un directorio con timestamp: staging/extract_[timestamp]/
-Copia los archivos extraídos
-Crea archivos de control y validación
+- Genera un directorio con timestamp: staging/extract_[timestamp]/
+- Copia los archivos extraídos
+- Crea archivos de control y validación
 
 
 **Validación de datos:**
 
-Verifica la estructura y contenido de los archivos CSV
-Genera estadísticas de validación en _VALIDATION.json
+- Verifica la estructura y contenido de los archivos CSV
+- Genera estadísticas de validación en _VALIDATION.json
 
 
 
 **3. Proceso de Transformación y Carga**
-El componente de transformación y carga (nba_etl.py) implementa:
+- El componente de transformación y carga (nba_etl.py) implementa:
 
 **Transformación de datos:**
 
@@ -74,40 +74,40 @@ El componente de transformación y carga (nba_etl.py) implementa:
 
 **Generación de resúmenes:**
 
-Resúmenes por temporada
-Resúmenes por equipo
-Análisis de rendimiento
+- Resúmenes por temporada
+- Resúmenes por equipo
+- Análisis de rendimiento
 
 
-Carga de datos:
+**Carga de datos:**
 
-Almacenamiento en PostgreSQL
-Generación de archivos CSV procesados
-Exportación para visualización
+- Almacenamiento en PostgreSQL
+- Generación de archivos CSV procesados
+- Exportación para visualización
 
 
 
 **4. Automatización del Pipeline**
 El script automaticetl.py orquesta todo el proceso:
 
-Programación: Ejecución diaria automática (configurable)
-Reintentos: Sistema de reintentos con delay en caso de fallos
-Monitoreo: Logging detallado de todo el proceso
-Control: Archivos de control para verificación de ejecución
+- Programación: Ejecución diaria automática (configurable)
+- Reintentos: Sistema de reintentos con delay en caso de fallos
+- Monitoreo: Logging detallado de todo el proceso
+- Control: Archivos de control para verificación de ejecución
 
 **Modelo de Datos**
-El sistema utiliza las siguientes tablas en PostgreSQL:
+- El sistema utiliza las siguientes tablas en PostgreSQL:
 
 **1. nba_playoffs_detailed:**
 
-Datos detallados de cada juego con métricas avanzadas
+- Datos detallados de cada juego con métricas avanzadas
 
 
 **2. nba_playoffs_season_summary:**
 
-Resumen de estadísticas por temporada
+- Resumen de estadísticas por temporada
 
 
 **3. nba_playoffs_team_summary:**
 
-Resumen de estadísticas por equipo
+- Resumen de estadísticas por equipo
