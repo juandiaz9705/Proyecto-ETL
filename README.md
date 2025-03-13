@@ -1,46 +1,102 @@
 **NBA Playoffs Data Pipeline**
 
-Este proyecto implementa un proceso ETL completo donde la extracción de datos es el primer paso. A continuación se detalla específicamente cómo funciona este componente:
+Este proyecto implementa un proceso ETL(Extract, Transform, Load) completo para analizar los datos de los playoffs de la NBA desde 2010 hasta 2024. El sistema automatiza la ingesta, procesamiento y análisis de datos de partidos de playoffs, generando métricas avanzadas y resúmenes por equipo y temporada.
 
-**Estructura de Repositorios**
-Este proyecto opera con dos repositorios diferentes:
+**Estructura del Proyecto**
+El proyecto ETL está divido en tres componentes principales:
 
-**1. Repositorio Fuente de Datos:** NBA-Data-2010-2024
-- Contiene los datos originales de los playoffs de la NBA (play_off_totals_2010_2024.csv)
-
-
-**2. Repositorio Actual (Proyecto ETL): Proyecto-ETL**
-
-- Contiene todo el código de procesamiento ETL
-- Incluye el script de extracción que copia datos desde el repositorio fuente al área de staging
-
-**Proceso de Extracción y Staging**
-
-El archivo test_extraction.py es el que conecta ambos repositorios:
-
-**1. Extracción de datos:** El script se conecta al repositorio fuente mediante: 
-
-**URL del repositorio fuente de datos de NBA**
-repo_url = "https://github.com/NocturneBear/NBA-Data-2010-2024"
-
-**2 Creación del área de staging:** El script crea una estructura de directorios dentro de este proyecto:
-
-data/staging/
-
-└── extract_20250309_230947/      # Directorio con timestamp de extracción
-
-    ├── play_off_totals_2010_2024.csv  # Datos extraídos
-    
-    ├── _CONTROL.txt               # Archivo de control con metadatos
-    
-    └── _VALIDATION.json           # Resultados de validación
-    
-**3. Preparación para ETL:** Después de la extracción, los datos en el área de staging quedan listos para ser procesados por el componente de transformación.
+├── automaticetl.py        # Script de automatización principal
+├── nba_etl.py             # Componente de transformación y carga 
+├── test_extraction.py     # Componente de extracción (renombrado a repository_to_staging.py)
+├── logs/                  # Directorio para archivos de registro
+├── processed_data/        # Datos procesados y transformados
+└── staging/               # Área de staging para datos extraídos
+    └── extract_[timestamp]/
+        ├── play_off_totals_2010_2024.csv
+        ├── _CONTROL.txt
+        └── _VALIDATION.json
 
 
-**Scripts Principales del Procesamiento**
+**Arquitectura de Datos**
+**1. Fuente de Datos**
+El proyecto obtiene datos del repositorio público:
 
-processed_data/scripts esta carpeta contiene los scripts que realizan el proceso de ETL
+Repositorio: NBA-Data-2010-2024
+Archivo principal: play_off_totals_2010_2024.csv
+Características: 2,362 registros de juegos, 57 columnas de métricas
 
-**nba_etl.py:**  Este script implementa la fase de Transformación y Carga (Transform & Load) del proceso ETL.
-**test_extraction.py:** Este script implementa la fase de Extracción (Extract) del proceso ETL, encargándose específicamente del proceso  de obtener datos del repositorio fuente y prepararlos en el área de staging-
+**2. Proceso de Extracción**
+El componente de extracción (test_extraction.py) implementa el siguiente flujo:
+
+**Conexión al repositorio fuente:**
+
+Descarga directa del archivo CSV mediante HTTPS
+Fallback a clonación completa del repositorio en caso necesario
+
+
+**Creación del área de staging:**
+
+Genera un directorio con timestamp: staging/extract_[timestamp]/
+Copia los archivos extraídos
+Crea archivos de control y validación
+
+
+**Validación de datos:**
+
+Verifica la estructura y contenido de los archivos CSV
+Genera estadísticas de validación en _VALIDATION.json
+
+
+
+**3. Proceso de Transformación y Carga**
+El componente de transformación y carga (nba_etl.py) implementa:
+
+**Transformación de datos:**
+
+- Limpieza y normalización de datos
+- Cálculo de métricas avanzadas:
+  1.Eficiencia ofensiva
+  2. Rating defensivo
+  3. Plus/minus por minuto
+  4. Ratio asistencias/pérdidas
+
+
+**Generación de resúmenes:**
+
+Resúmenes por temporada
+Resúmenes por equipo
+Análisis de rendimiento
+
+
+Carga de datos:
+
+Almacenamiento en PostgreSQL
+Generación de archivos CSV procesados
+Exportación para visualización
+
+
+
+**4. Automatización del Pipeline**
+El script automaticetl.py orquesta todo el proceso:
+
+Programación: Ejecución diaria automática (configurable)
+Reintentos: Sistema de reintentos con delay en caso de fallos
+Monitoreo: Logging detallado de todo el proceso
+Control: Archivos de control para verificación de ejecución
+
+**Modelo de Datos**
+El sistema utiliza las siguientes tablas en PostgreSQL:
+
+**1. nba_playoffs_detailed:**
+
+Datos detallados de cada juego con métricas avanzadas
+
+
+**2. nba_playoffs_season_summary:**
+
+Resumen de estadísticas por temporada
+
+
+**3. nba_playoffs_team_summary:**
+
+Resumen de estadísticas por equipo
