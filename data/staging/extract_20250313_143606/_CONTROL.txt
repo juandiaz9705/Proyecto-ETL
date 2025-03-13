@@ -1,0 +1,4 @@
+Extracción completada: 2025-03-13T14:36:06.945740
+Repositorio fuente: https://github.com/NocturneBear/NBA-Data-2010-2024
+Archivos extraídos: 1
+  - play_off_totals_2010_2024.csv (577092 bytes)

@@ -1,0 +1,5 @@
+total_rows: 2362
+columns: 57
+seasons: 14
+teams: 33
+extraction_time: 2025-03-13 14:36:07
