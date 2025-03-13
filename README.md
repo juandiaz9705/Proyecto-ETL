@@ -29,6 +29,7 @@ El proyecto ETL está divido en tres componentes principales:
 
 **Arquitectura de Datos**
 **1. Fuente de Datos**
+
 El proyecto obtiene datos del repositorio público:
 
 - Repositorio: NBA-Data-2010-2024
@@ -37,6 +38,7 @@ El proyecto obtiene datos del repositorio público:
   
 
 **2. Proceso de Extracción**
+
 El componente de extracción (test_extraction.py) implementa el siguiente flujo:
 
 **Conexión al repositorio fuente:**
@@ -60,6 +62,7 @@ El componente de extracción (test_extraction.py) implementa el siguiente flujo:
 
 
 **3. Proceso de Transformación y Carga**
+
 - El componente de transformación y carga (nba_etl.py) implementa:
 
 **Transformación de datos:**
@@ -88,6 +91,7 @@ El componente de extracción (test_extraction.py) implementa el siguiente flujo:
 
 
 **4. Automatización del Pipeline**
+
 El script automaticetl.py orquesta todo el proceso:
 
 - Programación: Ejecución diaria automática (configurable)
@@ -96,6 +100,7 @@ El script automaticetl.py orquesta todo el proceso:
 - Control: Archivos de control para verificación de ejecución
 
 **Modelo de Datos**
+
 - El sistema utiliza las siguientes tablas en PostgreSQL:
 
 **1. nba_playoffs_detailed:**
