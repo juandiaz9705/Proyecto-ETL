@@ -10,7 +10,7 @@ El proyecto ETL está divido en tres componentes principales:
 
 ├── nba_etl.py             # Componente de transformación y carga 
 
-├── test_extraction.py     # Componente de extracción (renombrado a repository_to_staging.py)
+├── test_extraction.py     # Componente de extracción 
 
 ├── logs/                  # Directorio para archivos de registro
 
