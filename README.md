@@ -116,3 +116,6 @@ El script automaticetl.py orquesta todo el proceso:
 **3. nba_playoffs_team_summary:**
 
 - Resumen de estadísticas por equipo
+
+**4. nba_playoffs_advanced:**
+ - Almacena los datos de playoffs de la NBA con métricas avanzadas calculadas.
