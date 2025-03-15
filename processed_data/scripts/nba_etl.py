@@ -26,7 +26,7 @@ class NBAPlayoffsETL:
         self.raw_data = None
         self.transformed_data = None
         
-        # Configuración predeterminada de la base de datos si no se proporciona
+        #Configuración de la base de datos
         if db_config is None:
             self.db_config = {
                 'host': 'localhost',
@@ -55,7 +55,7 @@ class NBAPlayoffsETL:
         )
         self.logger = logging.getLogger(__name__)
         
-        # Crear directorio para datos procesados si no existe
+        # Crear directorio para datos procesados si no existen
         processed_dir = Path('data/processed_data')
         processed_dir.mkdir(exist_ok=True, parents=True)
         
