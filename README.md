@@ -10,7 +10,7 @@ El proyecto ETL está divido en tres componentes principales:
 
 ├── nba_etl.py             # Componente de transformación y carga 
 
-├── test_extraction.py     # Componente de extracción (renombrado a repository_to_staging.py)
+├── test_extraction.py     # Componente de extracción 
 
 ├── logs/                  # Directorio para archivos de registro
 
@@ -116,3 +116,6 @@ El script automaticetl.py orquesta todo el proceso:
 **3. nba_playoffs_team_summary:**
 
 - Resumen de estadísticas por equipo
+
+**4. nba_playoffs_advanced:**
+ - Almacena los datos de playoffs de la NBA con métricas avanzadas calculadas.
