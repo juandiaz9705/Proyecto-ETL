@@ -326,6 +326,11 @@ def main():
         print("\nEl proceso falló. Revise los logs para más detalles.\n")
         return 1
 
-
 if __name__ == "__main__":
-    exit(main())
+    try:
+        exit(main())
+    except Exception as e:
+        import traceback
+        print(f"Error inesperado: {str(e)}")
+        traceback.print_exc()
+        exit(1)
