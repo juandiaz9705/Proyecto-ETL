@@ -1,7 +1,8 @@
 venv/
-.env
-logs/*.log
-temp_*
-venv/
-venv/
-venv/
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+logs/
+data/staging/*/
+
