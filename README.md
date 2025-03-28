@@ -131,15 +131,25 @@ Python: Lenguaje principal para todos los componentes del sistema ETL
 **Bibliotecas y Frameworks de Python**
 
 Pandas: Manipulación y análisis de datos
+
 NumPy: Soporte para operaciones numéricas
+
 Schedule: Programación de tareas automáticas
+
 Logging: Sistema de registro de actividades
+
 Psycopg2: Conexión con PostgreSQL
+
 SQLAlchemy: ORM para interacción con bases de datos
+
 Tkinter: Interfaz gráfica de usuario
+
 PIL/Pillow: Procesamiento de imágenes para la interfaz
+
 Subprocess: Ejecución de procesos externos
+
 Threading: Soporte para multihilos
+3
 Pathlib: Manipulación de rutas de archivos
 
 **Almacenamiento de Datos**
