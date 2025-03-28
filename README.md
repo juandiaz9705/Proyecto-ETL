@@ -128,23 +128,41 @@ cp *.py processed_data/scripts/
 #Estructura del Proyecto
 
 Proyecto-ETL/
+
 ├── automaticetl.py                  # Script de automatización principal
+
 ├── nba_etl.py                       # Componente de transformación y carga
+
 ├── test_extraction.py               # Componente de extracción
+
 ├── simplified_transformer.py        # Transformación avanzada
+
 ├── interface_app.py                 # Interfaz gráfica básica
+
 ├── interface_app2.py                # Interfaz gráfica mejorada
+
 ├── data/
+
 │   ├── staging/                     # Área de staging para datos extraídos
+
 │   │   └── extract_[timestamp]/
+
 │   │       ├── play_off_totals_2010_2024.csv
+
 │   │       ├── _CONTROL.txt
+
 │   │       └── _VALIDATION.json
+
 │   └── processed_data/              # Datos procesados y transformados
+
 ├── logs/                            # Directorio para archivos de registro
+
 ├── processed_data/
+
 │   └── scripts/                     # Copias de los scripts principales para ejecución desde la interfaz
+
 └── image/                           # Imágenes para la interfaz
+
     └── nba.png                      # Logo de la NBA para la interfaz
 
 
