@@ -75,3 +75,29 @@ venv\Scripts\activate
 **En macOS/Linux:**
 
 source venv/bin/activate
+
+
+**3. Instalar Dependencias**
+
+pip install -r requirements.txt
+
+pip install pandas numpy psycopg2-binary sqlalchemy pillow schedule
+
+
+A continuación se muestra el contenido recomendado para el archivo requirements.txt:
+
+- pandas==1.5.3
+- numpy==1.24.3
+- psycopg2-binary==2.9.6
+- sqlalchemy==2.0.15
+- pillow==9.5.0
+-schedule==1.2.0
+
+
+**4. Configurar Base de Datos PostgreSQL**
+
+1. Asegúrate de tener PostgreSQL instalado y en funcionamiento.
+2. Crear una base de datos para el proyecto:
+
+
+CREATE DATABASE nba_playoffs;
