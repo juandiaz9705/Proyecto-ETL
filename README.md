@@ -170,7 +170,7 @@ Proyecto-ETL/
 Los scripts principales pueden ubicarse tanto en el directorio raíz como en processed_data/scripts/ para permitir la ejecución tanto directa como desde la interfaz gráfica.
 
 
-#Uso del Sistema
+# Uso del Sistema
 
 **1. Modo Interfaz Gráfica**
 
@@ -211,7 +211,7 @@ Desde la interfaz gráfica podrás:
 
 
 
-#Arquitectura de Datos
+# Arquitectura de Datos
 
 **1. Fuente de Datos**
 
