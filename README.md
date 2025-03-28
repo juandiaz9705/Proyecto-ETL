@@ -50,6 +50,7 @@ Este proyecto implementa un proceso ETL (Extract, Transform, Load) completo para
 - Bibliotecas Python: pandas, numpy, psycopg2, sqlalchemy, PIL (Pillow), schedule, y otras dependencias
 
 
+
 **Instalación**
 
 
@@ -58,3 +59,14 @@ Este proyecto implementa un proceso ETL (Extract, Transform, Load) completo para
 git clone https://github.com/juandiaz9705/Proyecto-ETL.git
 cd Proyecto-ETL
 
+
+**2. Crear Entorno Virtual (Opcional pero Recomendado)**
+
+# Crear entorno virtual
+python -m venv venv
+
+# Activar entorno virtual
+# En Windows:
+venv\Scripts\activate
+# En macOS/Linux:
+source venv/bin/activate
