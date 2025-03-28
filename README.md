@@ -149,7 +149,7 @@ PIL/Pillow: Procesamiento de imágenes para la interfaz
 Subprocess: Ejecución de procesos externos
 
 Threading: Soporte para multihilos
-3
+
 Pathlib: Manipulación de rutas de archivos
 
 **Almacenamiento de Datos**
@@ -157,7 +157,7 @@ Pathlib: Manipulación de rutas de archivos
 PostgreSQL: Base de datos relacional para almacenar datos procesados
 CSV: Formato de almacenamiento de datos intermedio y final
 
-**Control de Versiones
+**Control de Versiones**
 
 Git: Control de versiones para extracción de datos y desarrollo
 
