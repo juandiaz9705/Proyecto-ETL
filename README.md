@@ -119,3 +119,46 @@ El script automaticetl.py orquesta todo el proceso:
 
 **4. nba_playoffs_advanced:**
  - Almacena los datos de playoffs de la NBA con métricas avanzadas calculadas.
+
+
+
+
+**Tecnologías Utilizadas**
+Lenguajes de Programación
+
+Python: Lenguaje principal para todos los componentes del sistema ETL
+
+**Bibliotecas y Frameworks de Python**
+
+Pandas: Manipulación y análisis de datos
+NumPy: Soporte para operaciones numéricas
+Schedule: Programación de tareas automáticas
+Logging: Sistema de registro de actividades
+Psycopg2: Conexión con PostgreSQL
+SQLAlchemy: ORM para interacción con bases de datos
+Tkinter: Interfaz gráfica de usuario
+PIL/Pillow: Procesamiento de imágenes para la interfaz
+Subprocess: Ejecución de procesos externos
+Threading: Soporte para multihilos
+Pathlib: Manipulación de rutas de archivos
+
+**Almacenamiento de Datos**
+
+PostgreSQL: Base de datos relacional para almacenar datos procesados
+CSV: Formato de almacenamiento de datos intermedio y final
+
+**Control de Versiones
+
+Git: Control de versiones para extracción de datos y desarrollo
+
+**Integración y Automatización**
+
+Programación por tareas: Mediante la biblioteca Schedule
+Sistema de reintentos: Implementación personalizada para manejo de fallos
+Archivos de control: Para seguimiento y auditoría del proceso ETL
+
+**Interfaz de Usuario**
+
+Tkinter: Framework para la interfaz gráfica
+Canvas: Para indicadores visuales de estado
+ScrolledText: Para visualización de logs
