@@ -312,15 +312,15 @@ El sistema utiliza las siguientes tablas en PostgreSQL:
 
 
 
-#Licencia
+# Licencia
 
 Este proyecto se distribuye bajo la licencia MIT del uso del DataSet.
 
-#Autor
+# Autor
 
 Juan Diego Díaz Guzmán
 
-#Agradecimientos
+# Agradecimientos
 Los datos utilizados en este proyecto provienen del repositorio público NBA-Data-2010-2024, mantenido bajo licencia MIT.
 
 
