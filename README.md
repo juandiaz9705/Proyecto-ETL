@@ -62,11 +62,16 @@ cd Proyecto-ETL
 
 **2. Crear Entorno Virtual (Opcional pero Recomendado)**
 
-# Crear entorno virtual
+**Crear entorno virtual**
+
 python -m venv venv
 
-# Activar entorno virtual
-# En Windows:
+**Activar entorno virtual**
+**En Windows:**
+
 venv\Scripts\activate
-# En macOS/Linux:
+
+
+**En macOS/Linux:**
+
 source venv/bin/activate
