@@ -48,3 +48,10 @@ Este proyecto implementa un proceso ETL (Extract, Transform, Load) completo para
 - Python 3.8 o superior
 - PostgreSQL 12 o superior
 - Bibliotecas Python: pandas, numpy, psycopg2, sqlalchemy, PIL (Pillow), schedule, y otras dependencias
+
+
+**Instalación**
+**1. Clonar el Repositorio**
+git clone https://github.com/juandiaz9705/Proyecto-ETL.git
+cd Proyecto-ETL
+
