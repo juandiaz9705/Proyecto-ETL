@@ -35,3 +35,16 @@ Este proyecto implementa un proceso ETL (Extract, Transform, Load) completo para
 - **Programación por tareas:** Mediante la biblioteca Schedule
 - **Sistema de reintentos:** Implementación personalizada para manejo de fallos
 - **Archivos de control:** Para seguimiento y auditoría del proceso ETL
+
+
+**Interfaz de Usuario**
+
+- **Tkinter:** Framework para la interfaz gráfica
+- **Canvas:** Para indicadores visuales de estado
+- **ScrolledText:** Para visualización de logs
+
+**Requisitos del Sistema**
+
+- Python 3.8 o superior
+- PostgreSQL 12 o superior
+- Bibliotecas Python: pandas, numpy, psycopg2, sqlalchemy, PIL (Pillow), schedule, y otras dependencias
