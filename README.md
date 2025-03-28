@@ -20,3 +20,18 @@ Este proyecto implementa un proceso ETL (Extract, Transform, Load) completo para
 - **Subprocess:** Ejecución de procesos externos
 - **Threading:** Soporte para multihilos
 - **Pathlib:** Manipulación de rutas de archivos
+
+**Almacenamiento de Datos**
+
+- **PostgreSQL:** Base de datos relacional para almacenar datos procesados
+- **CSV:** Formato de almacenamiento de datos intermedio y final
+
+**Control de Versiones**
+
+- **Git:** Control de versiones para extracción de datos y desarrollo
+
+**Integración y Automatización**
+
+- **Programación por tareas:** Mediante la biblioteca Schedule
+- **Sistema de reintentos:** Implementación personalizada para manejo de fallos
+- **Archivos de control:** Para seguimiento y auditoría del proceso ETL
